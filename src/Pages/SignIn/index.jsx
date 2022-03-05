@@ -1,25 +1,28 @@
-import React from 'react';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import Box from '@mui/material/Box';
-import Link from '@mui/material/Link';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
+import React, { useState } from 'react';
+
+// Material UI
+import {
+  Avatar,
+  Button,
+  CssBaseline,
+  TextField,
+  Box,
+  Link,
+  Typography,
+  Container,
+} from '@mui/material';
+import { AccountCircle } from '@mui/icons-material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 const theme = createTheme();
 
 export default function SignIn() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+    console.log({ email, password });
   };
 
   return (
@@ -35,7 +38,7 @@ export default function SignIn() {
           } }
         >
           <Avatar sx={ { m: 1, bgcolor: 'primary.main' } }>
-            <AccountCircleIcon />
+            <AccountCircle />
           </Avatar>
           <Typography component="h1" variant="h5">
             Entrar
@@ -49,6 +52,8 @@ export default function SignIn() {
               label="Email"
               name="email"
               autoFocus
+              value={ email }
+              onChange={ ({ target }) => setEmail(target.value) }
             />
             <TextField
               margin="normal"
@@ -58,6 +63,8 @@ export default function SignIn() {
               label="Senha"
               type="password"
               id="password"
+              value={ password }
+              onChange={ ({ target }) => setPassword(target.value) }
             />
             <Button
               type="submit"

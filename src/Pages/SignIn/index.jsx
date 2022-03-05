@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 
-// Material UI
 import {
   Avatar,
   Button,
@@ -12,7 +11,6 @@ import {
   Container,
 } from '@mui/material';
 import { AccountCircle } from '@mui/icons-material';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 import {
   mainContainerPkg,
@@ -25,8 +23,6 @@ import {
   buttonSubmitPkg,
 } from './styles';
 
-const theme = createTheme();
-
 export default function SignIn() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -37,36 +33,34 @@ export default function SignIn() {
   };
 
   return (
-    <ThemeProvider theme={ theme }>
-      <Container { ...mainContainerPkg }>
-        <CssBaseline />
+    <Container { ...mainContainerPkg }>
+      <CssBaseline />
 
-        <Box sx={ boxLoginPkg }>
-          <Avatar sx={ avatarPkg }>
-            <AccountCircle />
-          </Avatar>
+      <Box sx={ boxLoginPkg }>
+        <Avatar sx={ avatarPkg }>
+          <AccountCircle />
+        </Avatar>
 
-          <Typography { ...titleLoginPkg }> Entrar </Typography>
+        <Typography { ...titleLoginPkg }> Entrar </Typography>
 
-          <Box { ...boxFormPkg } sx={ { mt: 1 } } onSubmit={ handleSubmit }>
-            <TextField
-              { ...emailFieldPkg }
-              value={ email }
-              onChange={ ({ target }) => setEmail(target.value) }
-            />
-            <TextField
-              { ...passwordFieldPkg }
-              value={ password }
-              onChange={ ({ target }) => setPassword(target.value) }
-            />
-            <Button { ...buttonSubmitPkg } sx={ { mt: 3, mb: 2 } }> Entrar </Button>
-            <Link href="/register" variant="body2">
-              Não tem uma conta? Inscreva-se
-            </Link>
-          </Box>
+        <Box { ...boxFormPkg } sx={ { mt: 1 } } onSubmit={ handleSubmit }>
+          <TextField
+            { ...emailFieldPkg }
+            value={ email }
+            onChange={ ({ target }) => setEmail(target.value) }
+          />
+          <TextField
+            { ...passwordFieldPkg }
+            value={ password }
+            onChange={ ({ target }) => setPassword(target.value) }
+          />
+          <Button { ...buttonSubmitPkg } sx={ { mt: 3, mb: 2 } }> Entrar </Button>
+          <Link href="/register" variant="body2">
+            Não tem uma conta? Inscreva-se
+          </Link>
         </Box>
+      </Box>
 
-      </Container>
-    </ThemeProvider>
+    </Container>
   );
 }

@@ -1,11 +1,35 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App/index';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
+
+// Common
+import App from './App/index';
+import Register from './Pages/Register/index';
+import Login from './Pages/Login/index';
+import NotFound from './Pages/NotFound/index';
+import Tasks from './Pages/Tasks/index';
+import Task from './Pages/Task/index';
+
+const getRoutes = () => (
+  <Routes>
+    <Route path="/" element={ <App /> }>
+      <Route path="register" element={ <Register /> } />
+      <Route path="login" element={ <Login /> } />
+      <Route path="tasks" element={ <Tasks /> }>
+        <Route index element={ <div>Selecione uma task</div> } />
+        <Route path=":id" element={ <Task /> } />
+      </Route>
+    </Route>
+    <Route path="*" element={ <NotFound /> } />
+  </Routes>
+);
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <BrowserRouter>
+      { getRoutes() }
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root'),
 );

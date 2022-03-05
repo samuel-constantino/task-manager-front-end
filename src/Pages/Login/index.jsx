@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 
 import {
   Avatar,
@@ -23,13 +23,17 @@ import {
   buttonSubmitPkg,
 } from './styles';
 
-export default function SignIn() {
+import { AuthContext } from '../../Contexts/auth';
+
+export default function Login() {
+  const { login } = useContext(AuthContext);
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log({ email, password });
+    login(email, password);
   };
 
   return (

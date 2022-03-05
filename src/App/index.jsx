@@ -1,8 +1,11 @@
 import React from 'react';
-import SignIn from '../Pages/SignIn/index';
+import Router from '../Router/index';
+import { AuthProvider } from '../Contexts/auth';
 
 export default function App() {
   return (
-    <SignIn />
+    <AuthProvider>
+      <Router />
+    </AuthProvider>
   );
 }

@@ -4,7 +4,9 @@ import PropTypes from 'prop-types';
 import { AuthContext } from '../Contexts/auth';
 
 export default function Private({ children }) {
-  const { authenticated } = useContext(AuthContext);
+  const { authenticated, loading } = useContext(AuthContext);
+
+  if (loading) return <h1>Carregando...</h1>;
 
   if (!authenticated) return <Navigate to="/login" />;
   return children;

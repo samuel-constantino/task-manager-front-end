@@ -1,4 +1,4 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
@@ -7,18 +7,30 @@ export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loggedUser = JSON.parse(localStorage.getItem('user'));
+
+    if (loggedUser) setUser(loggedUser);
+
+    setLoading(false);
+  }, []);
 
   const login = (email, password) => {
-    console.log('login', { email, password });
     if (password === '123') {
-      setUser({ id: '123', email });
+      const loggedUser = { id: '123456', email, password };
+
+      setUser(loggedUser);
+      localStorage.setItem('user', JSON.stringify(loggedUser));
+
       navigate('/');
     }
   };
 
   const logout = () => {
-    console.log('logout');
     setUser(null);
+    localStorage.removeItem('user');
     navigate('/login');
   };
 
@@ -27,6 +39,7 @@ export const AuthProvider = ({ children }) => {
     user,
     login,
     logout,
+    loading,
   };
 
   return (

@@ -1,6 +1,7 @@
 import React, { createContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { createSession } from '../Services/api';
 
 export const AuthContext = createContext();
 
@@ -17,15 +18,11 @@ export const AuthProvider = ({ children }) => {
     setLoading(false);
   }, []);
 
-  const login = (email, password) => {
-    if (password === '123') {
-      const loggedUser = { id: '123456', email, password };
-
-      setUser(loggedUser);
-      localStorage.setItem('user', JSON.stringify(loggedUser));
-
-      navigate('/');
-    }
+  const login = async (email, password) => {
+    const { data: loggedUser } = await createSession(email, password);
+    setUser(loggedUser);
+    localStorage.setItem('user', JSON.stringify(loggedUser));
+    navigate('/');
   };
 
   const logout = () => {

@@ -3,7 +3,6 @@ import {
   BrowserRouter,
   Routes,
   Route,
-  // Navigate,
 } from 'react-router-dom';
 import { AuthProvider } from '../Contexts/auth';
 import Private from './private';

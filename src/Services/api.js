@@ -7,11 +7,11 @@ export const api = axios.create({
 });
 
 api.interceptors.request.use((req) => {
-  if (req.url === '/user/login' || req.url === '/user/register') return req;
+  if (req.url === '/login' || req.url === '/register') return req;
   req.headers.authorization = getToken();
   return req;
 });
 
 export const createSession = async (email, password) => (
-  api.post('/user/login', { email, password })
+  api.post('/login', { email, password })
 );

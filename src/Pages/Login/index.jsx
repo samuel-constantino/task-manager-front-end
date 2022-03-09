@@ -25,11 +25,15 @@ import {
 
 import { AuthContext } from '../../Contexts/auth';
 
+import { validateEmail, validatePassword } from '../../Helpers/validateForm';
+
 export default function Login() {
   const { login } = useContext(AuthContext);
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const disabledBtn = !(validateEmail(email) && validatePassword(password));
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -58,7 +62,7 @@ export default function Login() {
             value={ password }
             onChange={ ({ target }) => setPassword(target.value) }
           />
-          <Button { ...buttonSubmitPkg } sx={ { mt: 3, mb: 2 } }> Entrar </Button>
+          <Button { ...buttonSubmitPkg } sx={ { mt: 3, mb: 2 } } disabled={ disabledBtn }> Entrar </Button>
           <Link href="/register" variant="body2">
             Não tem uma conta? Inscreva-se
           </Link>

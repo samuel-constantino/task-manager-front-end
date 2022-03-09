@@ -1,8 +1,11 @@
 import React from 'react';
 import Router from '../Router/index';
+import { AuthProvider } from '../Contexts/auth';
 
 export default function App() {
   return (
-    <Router />
+    <AuthProvider>
+      <Router />
+    </AuthProvider>
   );
 }

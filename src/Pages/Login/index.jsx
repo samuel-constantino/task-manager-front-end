@@ -45,7 +45,7 @@ export default function Login() {
           <AccountCircle />
         </Avatar>
 
-        <Typography { ...titleLoginPkg }> Entrar </Typography>
+        <Typography { ...titleLoginPkg }>Entrar</Typography>
 
         <Box { ...boxFormPkg } sx={ { mt: 1 } } onSubmit={ handleSubmit }>
           <TextField

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const getToken = () => localStorage.getItem('user').token;
+const getToken = () => JSON.parse(localStorage.getItem('user')).token;
 
 export const api = axios.create({
   baseURL: 'http://localhost:4000',
@@ -14,4 +14,8 @@ api.interceptors.request.use((req) => {
 
 export const createSession = async (email, password) => (
   api.post('/login', { email, password })
+);
+
+export const getTasksByUser = async () => (
+  api.get('/')
 );

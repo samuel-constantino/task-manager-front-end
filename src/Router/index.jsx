@@ -2,7 +2,7 @@ import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Private from './private';
 import Login from '../Pages/Login/index';
-import Home from '../Pages/Home/index';
+import Tasks from '../Pages/Tasks/index';
 import NotFound from '../Pages/NotFound/index';
 
 export default function Router() {
@@ -13,7 +13,7 @@ export default function Router() {
         path="/"
         element={
           <Private>
-            <Home />
+            <Tasks />
           </Private>
         }
       />

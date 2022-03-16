@@ -17,5 +17,5 @@ export const createSession = async (email, password) => (
 );
 
 export const getTasksByUser = async () => (
-  api.get('/')
+  api.get('/tasks')
 );

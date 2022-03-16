@@ -1,4 +1,5 @@
 import React, { useState, useContext, useCallback, useEffect } from 'react';
+import { Grid } from '@mui/material';
 import { AuthContext } from '../../Contexts/auth';
 import { getTasksByUser } from '../../Services/api';
 import TaskCard from '../../Components/TaskCard';
@@ -18,14 +19,16 @@ export default function Tasks() {
         <h1>HOME PAGE</h1>
         <button type="button" onClick={ logout }>Logout</button>
       </nav>
-      <div>
-        {
-          tasks ? tasks.map((task) => {
-            const { _id: id } = task;
-            return <TaskCard key={ id } task={ task } />;
-          }) : <h1>Loading...</h1>
-        }
-      </div>
+      <Grid container spacing={ { xs: 2, md: 3 } }>
+        { tasks ? tasks.map((task) => {
+          const { _id: id } = task;
+          return (
+            <Grid item xs={ 12 } sm={ 6 } md={ 4 } key={ id }>
+              <TaskCard key={ id } task={ task } />
+            </Grid>
+          );
+        }) : <h1>Loading...</h1> }
+      </Grid>
     </>
   );
 }

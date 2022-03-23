@@ -1,12 +1,11 @@
-import React, { useState, useContext, useCallback, useEffect } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { Grid } from '@mui/material';
-import { AuthContext } from '../../Contexts/auth';
 import { getTasksByUser } from '../../Services/api';
-import TaskCard from '../../Components/TaskCard';
+import TaskCard from './TaskCard/index';
+import NavBar from '../../Components/NavBar';
 
 export default function Tasks() {
   const [tasks, setTasks] = useState(null);
-  const { logout } = useContext(AuthContext);
 
   const getTasks = useCallback(async () => {
     const { data } = await getTasksByUser();
@@ -17,10 +16,7 @@ export default function Tasks() {
 
   return (
     <>
-      <nav>
-        <h1>HOME PAGE</h1>
-        <button type="button" onClick={ logout }>Logout</button>
-      </nav>
+      <NavBar />
       <Grid container spacing={ { xs: 2, md: 3 } }>
         { tasks ? tasks.map((task) => {
           const { _id: id } = task;

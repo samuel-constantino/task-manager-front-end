@@ -5,9 +5,7 @@ import { AuthContext } from '../Contexts/auth';
 
 export default function Private({ children }) {
   const { authenticated, loading } = useContext(AuthContext);
-
   if (loading) return <h1>Carregando...</h1>;
-
   if (!authenticated) return <Navigate to="/login" />;
   return children;
 }

@@ -19,3 +19,7 @@ export const createSession = async (email, password) => (
 export const getTasksByUser = async () => (
   api.get('/tasks')
 );
+
+export const addTask = async (newTask) => (
+  api.post('/tasks', newTask)
+);

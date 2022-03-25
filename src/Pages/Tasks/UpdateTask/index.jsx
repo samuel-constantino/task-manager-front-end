@@ -10,6 +10,8 @@ import {
   Container,
 } from '@mui/material';
 
+import PropTypes from 'prop-types';
+
 import { validateTask } from '../../../Helpers/validateForm';
 import NavBar from '../../../Components/NavBar/index';
 import RadioWrapper from '../../../Components/RadioWrapper/index';
@@ -26,12 +28,18 @@ import {
 
 import { addTask } from '../../../Services/api';
 
-export default function AddTask() {
-  const [name, setName] = useState('');
-  const [description, setDescription] = useState('');
-  const [status, setStatus] = useState('In progress');
-  const [important, setImportant] = useState(true);
-  const [urgent, setUrgent] = useState(true);
+export default function UpdateTask({
+  taskName = '',
+  taskDescription = '',
+  taskStatus = 'In progress',
+  taskImportant = true,
+  taskUrgent = true,
+}) {
+  const [name, setName] = useState(taskName);
+  const [description, setDescription] = useState(taskDescription);
+  const [status, setStatus] = useState(taskStatus);
+  const [important, setImportant] = useState(taskImportant);
+  const [urgent, setUrgent] = useState(taskUrgent);
 
   const disabledBtn = validateTask({
     name,
@@ -121,3 +129,11 @@ export default function AddTask() {
     </>
   );
 }
+
+UpdateTask.propTypes = {
+  taskName: PropTypes.string,
+  taskDescription: PropTypes.string,
+  taskStatus: PropTypes.string,
+  taskImportant: PropTypes.bool,
+  taskUrgent: PropTypes.bool,
+}.isRequired;

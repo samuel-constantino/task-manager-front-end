@@ -22,7 +22,7 @@ export default function Tasks() {
           const { _id: id } = task;
           return (
             <Grid item xs={ 12 } sm={ 6 } md={ 4 } key={ id }>
-              <TaskCard key={ id } task={ task } />
+              <TaskCard key={ id } task={ task } getTasks={ getTasks } />
             </Grid>
           );
         }) : <h1>Loading...</h1> }

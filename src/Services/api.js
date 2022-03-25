@@ -23,3 +23,7 @@ export const getTasksByUser = async () => (
 export const addTask = async (newTask) => (
   api.post('/tasks', newTask)
 );
+
+export const removeTask = async (name) => (
+  api.delete(`/tasks/${name}`)
+);

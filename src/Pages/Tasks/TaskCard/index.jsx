@@ -5,9 +5,16 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import PropTypes from 'prop-types';
+import { removeTask } from '../../../Services/api';
 
-export default function TaskCard({ task }) {
+export default function TaskCard({ task, getTasks }) {
   const { name, description, status } = task;
+
+  const handleCancel = (taskName) => {
+    removeTask(taskName);
+    getTasks();
+  };
+
   return (
     <Card sx={ { minWidth: 275 } }>
       <CardContent>
@@ -23,7 +30,15 @@ export default function TaskCard({ task }) {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">Done</Button>
+        <Button size="small">Feito</Button>
+        <Button size="small">Editar</Button>
+        <Button
+          size="small"
+          name={ name }
+          onClick={ ({ target }) => handleCancel(target.name) }
+        >
+          Cancelar
+        </Button>
       </CardActions>
     </Card>
   );

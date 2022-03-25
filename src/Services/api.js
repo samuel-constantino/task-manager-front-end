@@ -24,6 +24,10 @@ export const addTask = async (newTask) => (
   api.post('/tasks', newTask)
 );
 
-export const removeTask = async (name) => (
-  api.delete(`/tasks/${name}`)
+export const removeTask = async (id) => (
+  api.delete(`/tasks/${id}`)
+);
+
+export const editTask = async (id) => (
+  api.put(`/tasks/${id}`)
 );

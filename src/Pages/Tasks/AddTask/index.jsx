@@ -10,6 +10,8 @@ import {
   Container,
 } from '@mui/material';
 
+import { validateTask } from '../../../Helpers/validateForm';
+
 import RadioWrapper from '../../../Components/RadioWrapper/index';
 
 import {
@@ -31,7 +33,13 @@ export default function AddTask() {
   const [status, setStatus] = useState('');
   const [importance, setImportance] = useState(true);
   const [urgence, setUrgence] = useState(true);
-  // const disabledBtn = !(validateEmail(email) && validatePassword(password));
+
+  const disabledBtn = validateTask({
+    name,
+    description,
+    status,
+  });
+  console.log(disabledBtn);
 
   // const navigate = useNavigate();
 
@@ -95,7 +103,7 @@ export default function AddTask() {
               labels: ['Baixa', 'Alta'],
             } }
           />
-          <Button { ...buttonSubmitPkg } sx={ { mt: 3, mb: 2 } }>
+          <Button { ...buttonSubmitPkg } sx={ { mt: 3, mb: 2 } } disabled={ disabledBtn }>
             Criar
           </Button>
         </Box>

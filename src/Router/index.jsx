@@ -3,7 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import Private from './private';
 import Login from '../Pages/Login/index';
 import Tasks from '../Pages/Tasks/index';
-import UpdateTask from '../Pages/Tasks/UpdateTask/indexdex';
+import UpdateTask from '../Pages/Tasks/UpdateTask/index';
 import NotFound from '../Pages/NotFound/index';
 
 export default function Router() {

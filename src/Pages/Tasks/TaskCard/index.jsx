@@ -6,12 +6,24 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import PropTypes from 'prop-types';
-import { removeTask } from '../../../Services/api';
+import { removeTask, editTask } from '../../../Services/api';
 
 export default function TaskCard({ task, getTasks }) {
-  const { id, name, description, status } = task;
+  const { id, name, description, status, priority } = task;
 
   const navigate = useNavigate();
+
+  const handleDone = () => {
+    const doneTask = {
+      id,
+      name,
+      description,
+      status: 'Done',
+      priority,
+    };
+    editTask(doneTask);
+    getTasks();
+  };
 
   const handleCancel = (taskId) => {
     removeTask(taskId);
@@ -33,7 +45,13 @@ export default function TaskCard({ task, getTasks }) {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">Feito</Button>
+        <Button
+          size="small"
+          id={ id }
+          onClick={ () => handleDone() }
+        >
+          Feito
+        </Button>
         <Button
           size="small"
           id={ id }

@@ -1,22 +1,20 @@
 import * as React from 'react';
+import { useNavigate } from 'react-router-dom';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import PropTypes from 'prop-types';
-import { removeTask, editTask } from '../../../Services/api';
+import { removeTask } from '../../../Services/api';
 
 export default function TaskCard({ task, getTasks }) {
   const { id, name, description, status } = task;
 
+  const navigate = useNavigate();
+
   const handleCancel = (taskId) => {
     removeTask(taskId);
-    getTasks();
-  };
-
-  const handleEdit = (taskId) => {
-    editTask(taskId);
     getTasks();
   };
 
@@ -39,7 +37,7 @@ export default function TaskCard({ task, getTasks }) {
         <Button
           size="small"
           id={ id }
-          onClick={ ({ target }) => handleEdit(target.id) }
+          onClick={ ({ target }) => navigate(`/${target.id}`) }
         >
           Editar
         </Button>

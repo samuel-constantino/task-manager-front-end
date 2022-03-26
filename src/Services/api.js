@@ -20,6 +20,10 @@ export const getTasksByUser = async () => (
   api.get('/tasks')
 );
 
+export const getTaskById = async (id) => (
+  api.get(`/tasks/${id}`)
+);
+
 export const addTask = async (newTask) => (
   api.post('/tasks', newTask)
 );
@@ -28,6 +32,7 @@ export const removeTask = async (id) => (
   api.delete(`/tasks/${id}`)
 );
 
-export const editTask = async (id) => (
-  api.put(`/tasks/${id}`)
-);
+export const editTask = async (task) => {
+  const { id, name, description, status, priority } = task;
+  return api.put(`/tasks/${id}`, { name, description, status, priority });
+};

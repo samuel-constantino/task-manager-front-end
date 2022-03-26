@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect, useCallback } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import {
   Button,
@@ -9,8 +9,6 @@ import {
   Typography,
   Container,
 } from '@mui/material';
-
-import PropTypes from 'prop-types';
 
 import { validateTask } from '../../../Helpers/validateForm';
 import NavBar from '../../../Components/NavBar/index';
@@ -26,20 +24,28 @@ import {
   buttonSubmitPkg,
 } from './styles';
 
-import { addTask } from '../../../Services/api';
+import { getTaskById, editTask } from '../../../Services/api';
 
-export default function UpdateTask({
-  taskName = '',
-  taskDescription = '',
-  taskStatus = 'In progress',
-  taskImportant = true,
-  taskUrgent = true,
-}) {
-  const [name, setName] = useState(taskName);
-  const [description, setDescription] = useState(taskDescription);
-  const [status, setStatus] = useState(taskStatus);
-  const [important, setImportant] = useState(taskImportant);
-  const [urgent, setUrgent] = useState(taskUrgent);
+export default function UpdateTask() {
+  const [name, setName] = useState('');
+  const [description, setDescription] = useState('');
+  const [status, setStatus] = useState('In progress');
+  const [important, setImportant] = useState(true);
+  const [urgent, setUrgent] = useState(true);
+
+  const navigate = useNavigate();
+  const { id: taskId } = useParams();
+
+  const getTask = useCallback(async () => {
+    const { data: task } = await getTaskById(taskId);
+    setName(task.name);
+    setDescription(task.description);
+    setStatus(task.status);
+    setImportant(task.priority.important);
+    setUrgent(task.priority.urgent);
+  }, [taskId]);
+
+  useEffect(() => getTask(), [getTask]);
 
   const disabledBtn = validateTask({
     name,
@@ -47,12 +53,11 @@ export default function UpdateTask({
     status,
   });
 
-  const navigate = useNavigate();
-
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    const newTask = {
+    const updatedTask = {
+      id: taskId,
       name,
       description,
       status,
@@ -62,7 +67,7 @@ export default function UpdateTask({
       },
     };
 
-    addTask(newTask);
+    editTask(updatedTask);
     navigate('/');
   };
 
@@ -73,7 +78,7 @@ export default function UpdateTask({
         <CssBaseline />
 
         <Box sx={ boxCreateTaskPkg }>
-          <Typography { ...titleTaskPkg }>Nova Tarefa</Typography>
+          <Typography { ...titleTaskPkg }>Editar Tarefa</Typography>
 
           <Box { ...boxFormPkg } sx={ { mt: 1 } } onSubmit={ handleSubmit }>
             <TextField
@@ -120,7 +125,7 @@ export default function UpdateTask({
               sx={ { mt: 3, mb: 2 } }
               disabled={ disabledBtn }
             >
-              Criar
+              Editar
             </Button>
           </Box>
         </Box>
@@ -129,11 +134,3 @@ export default function UpdateTask({
     </>
   );
 }
-
-UpdateTask.propTypes = {
-  taskName: PropTypes.string,
-  taskDescription: PropTypes.string,
-  taskStatus: PropTypes.string,
-  taskImportant: PropTypes.bool,
-  taskUrgent: PropTypes.bool,
-}.isRequired;

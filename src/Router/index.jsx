@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import Private from './private';
 import Login from '../Pages/Login/index';
 import Tasks from '../Pages/Tasks/index';
+import AddTask from '../Pages/Tasks/AddTask/index';
 import UpdateTask from '../Pages/Tasks/UpdateTask/index';
 import NotFound from '../Pages/NotFound/index';
 
@@ -21,6 +22,15 @@ export default function Router() {
       <Route
         exact
         path="/create"
+        element={
+          <Private>
+            <AddTask />
+          </Private>
+        }
+      />
+      <Route
+        exact
+        path="/:id"
         element={
           <Private>
             <UpdateTask />

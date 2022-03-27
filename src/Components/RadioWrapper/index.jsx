@@ -8,9 +8,9 @@ export default function RadioWrapper({ buttonsInfo }) {
   const { defaultValue, setValue, options, labels } = buttonsInfo;
 
   const handleChange = (value) => {
-    if(value === 'true' || value === 'false'){
+    if (value === 'true' || value === 'false') {
       setValue(value === 'true');
-    }else{
+    } else {
       setValue(value);
     }
   };

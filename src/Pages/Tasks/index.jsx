@@ -6,7 +6,6 @@ import NavBar from '../../Components/NavBar';
 
 export default function Tasks() {
   const [tasks, setTasks] = useState(null);
-
   const getTasks = useCallback(async () => {
     const { data } = await getTasksByUser();
     setTasks(data);

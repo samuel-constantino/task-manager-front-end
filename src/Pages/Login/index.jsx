@@ -62,7 +62,13 @@ export default function Login() {
             value={ password }
             onChange={ ({ target }) => setPassword(target.value) }
           />
-          <Button { ...buttonSubmitPkg } sx={ { mt: 3, mb: 2 } } disabled={ disabledBtn }> Entrar </Button>
+          <Button
+            { ...buttonSubmitPkg }
+            sx={ { mt: 3, mb: 2 } }
+            disabled={ disabledBtn }
+          >
+            Entrar
+          </Button>
           <Link href="/register" variant="body2">
             Não tem uma conta? Inscreva-se
           </Link>

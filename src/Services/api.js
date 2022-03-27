@@ -1,14 +1,18 @@
 import axios from 'axios';
 
+const { REACT_APP_ENV, REACT_APP_API } = process.env;
+const LOCAL_API = 'http://localhost:4000';
+
+const BASE_URL = REACT_APP_ENV === 'dev' ? LOCAL_API : REACT_APP_API;
 const getToken = () => JSON.parse(localStorage.getItem('user')).token;
 
 export const api = axios.create({
-  baseURL: 'http://localhost:4000',
+  baseURL: BASE_URL,
 });
 
 api.interceptors.request.use((req) => {
   if (req.url === '/login' || req.url === '/register') return req;
-  req.headers.authorization = getToken();
+  req.headers.authorization = `Bearer ${getToken()}`;
   return req;
 });
 

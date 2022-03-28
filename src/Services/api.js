@@ -1,10 +1,10 @@
 import axios from 'axios';
 
-// const { REACT_APP_ENV, REACT_APP_API } = process.env;
-// const LOCAL_API = 'http://localhost:4000';
+const { REACT_APP_ENV, REACT_APP_API } = process.env;
+const LOCAL_API = 'http://localhost:4000';
 
-// const BASE_URL = REACT_APP_ENV === 'dev' ? LOCAL_API : REACT_APP_API;
-const BASE_URL = 'https://task-manager-bk-0209.herokuapp.com';
+const BASE_URL = REACT_APP_ENV === 'dev' ? LOCAL_API : REACT_APP_API;
+// const BASE_URL = 'https://task-manager-bk-0209.herokuapp.com';
 const getToken = () => JSON.parse(localStorage.getItem('user')).token;
 
 export const api = axios.create({

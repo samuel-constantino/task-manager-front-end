@@ -2,6 +2,7 @@ import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Private from './private';
 import Login from '../Pages/Login/index';
+import Register from '../Pages/Register/index';
 import Tasks from '../Pages/Tasks/index';
 import AddTask from '../Pages/Tasks/AddTask/index';
 import UpdateTask from '../Pages/Tasks/UpdateTask/index';
@@ -38,6 +39,7 @@ export default function Router() {
         }
       />
       <Route exact path="/login" element={ <Login /> } />
+      <Route exact path="/register" element={ <Register /> } />
       <Route path="*" element={ <NotFound /> } />
     </Routes>
   );

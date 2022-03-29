@@ -1,10 +1,9 @@
 import axios from 'axios';
 
-const { REACT_APP_ENV, REACT_APP_API } = process.env;
-const LOCAL_API = 'http://localhost:4000';
+const { REACT_APP_ENV, REACT_APP_API, REACT_APP_LOCAL_API } = process.env;
 
-const BASE_URL = REACT_APP_ENV === 'dev' ? LOCAL_API : REACT_APP_API;
-// const BASE_URL = 'https://task-manager-bk-0209.herokuapp.com';
+const BASE_URL = REACT_APP_ENV === 'dev' ? REACT_APP_LOCAL_API : REACT_APP_API;
+
 const getToken = () => JSON.parse(localStorage.getItem('user')).token;
 
 export const api = axios.create({
@@ -19,6 +18,10 @@ api.interceptors.request.use((req) => {
 
 export const createSession = async (email, password) => (
   api.post('/login', { email, password })
+);
+
+export const registerUser = async (name, email, password) => (
+  api.post('/register', { name, email, password })
 );
 
 export const getTasksByUser = async () => (

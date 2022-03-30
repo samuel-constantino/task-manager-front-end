@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import {
   Avatar,
@@ -42,12 +42,12 @@ export default function Register() {
     && validatePassword(password)
   );
 
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
     registerUser(name, email, password);
-    // navigate('/login');
+    navigate('/login');
   };
 
   return (

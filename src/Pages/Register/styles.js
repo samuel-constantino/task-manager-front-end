@@ -25,7 +25,7 @@ const nameFieldPkg = {
   required: true,
   fullWidth: true,
   id: 'name',
-  label: 'Name',
+  label: 'Nome',
   name: 'name',
   autoFocus: true,
 };
@@ -42,9 +42,7 @@ const passwordFieldPkg = {
   required: true,
   fullWidth: true,
   name: 'password',
-  label: 'Senha',
   type: 'password',
-  id: 'password',
 };
 const buttonSubmitPkg = {
   type: 'submit',

@@ -36,10 +36,12 @@ export default function Register() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [repeatPassword, setRepeatPassword] = useState('');
 
   const disabledBtn = !(validateName(name)
-    && validateEmail(email)
+    && password === repeatPassword
     && validatePassword(password)
+    && validateEmail(email)
   );
 
   const navigate = useNavigate();
@@ -74,8 +76,17 @@ export default function Register() {
           />
           <TextField
             { ...passwordFieldPkg }
+            id="password"
+            label="Senha"
             value={ password }
             onChange={ ({ target }) => setPassword(target.value) }
+          />
+          <TextField
+            { ...passwordFieldPkg }
+            id="repeatPassword"
+            label="Confirme a senha"
+            value={ repeatPassword }
+            onChange={ ({ target }) => setRepeatPassword(target.value) }
           />
           <Button
             { ...buttonSubmitPkg }
